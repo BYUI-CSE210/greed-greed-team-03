@@ -24,6 +24,7 @@ class Director:
         """
         self._keyboard_service = keyboard_service
         self._video_service = video_service
+        self._score = 600
 
     def start_game(self, cast):
         """Starts the game using the given cast. Runs the main game loop.
@@ -44,7 +45,9 @@ class Director:
         Args:
             cast (Cast): The cast of actors.
         """
-        pass
+        player = cast.get_first_actor("players")    
+        velocity = self._keyboard_service.get_direction()
+        player.set_velocity(velocity)
 
     def _do_updates(self, cast):
         """Updates the robot's position and resolves any collisions with artifacts.
@@ -52,7 +55,25 @@ class Director:
         Args:
             cast (Cast): The cast of actors.
         """
-        pass
+        player = cast.get_first_actor("players") 
+        score = cast.get_first_actor("score")
+        rocks = cast.get_actors("rocks")
+        gems = cast.get_actors("artifacts")
+
+        score.set_text(f"Score: {self._score}")
+        max_x = self._video_service.get_width()
+        max_y = self._video_service.get_height()
+        player.move_next(max_x, max_y)
+      
+        # Position Validation
+        for rock in rocks:
+            if player.get_position() == rock.get_position():
+                self._score -= 1
+                score.set_text(f"Score: {self._score}")
+        for gem in gems:
+            if player.get_position() == gem.get_position():
+                self._score += 1
+                score.set_text(f"Score: {self._score}")
 
     def _do_outputs(self, cast):
         """Draws the actors on the screen.
