@@ -9,7 +9,13 @@
     -The game continues until the player closes the window.
 
 ## Getting Started
-Make sure you have Python 3.8.0 or newer installed and running on your machine.
+Make sure you have Python 3.8.0 or newer and Raylib Python CFFI 3.7 installed and running on your machine. You can install Raylib Python CFFI by opening a terminal and running the following command.
+```
+python3 -m pip install raylib
+```
+After you've installed the required libraries, open a terminal and browse to the project's root folder. Start the program by running the following command.```
+
+python3 rfk 
 
 You can run the program from an IDE like Visual Studio Code. Start your IDE and open the project folder. Select the main module inside the hunter folder and click the "run" icon.
 
@@ -20,13 +26,12 @@ greed-team-03   (project root folder)
 +-- greed              (source code for game)
   +-- game              (specific classes)
     +--actor.py
-    +--gems.py
-    +--player.py
-    +--rocks.py
+    +--cast.py
     +--director.py
     +--keyboard_service.py
     +--video_service.py
     +--color.py
+    +--interval.py
     +--point.py
   +-- __main__.py       (program entry point)
 +-- README.md           (general info)
