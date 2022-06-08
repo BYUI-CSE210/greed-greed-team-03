@@ -3,6 +3,8 @@ import random
 
 from game.casting.actor import Actor
 from game.casting.cast import Cast
+from game.casting.gems import Gems
+from game.casting.rocks import Rocks
 
 from game.directing.director import Director
 
@@ -22,6 +24,9 @@ COLS = 60
 ROWS = 40
 CAPTION = "GREED"
 WHITE = Color(255, 255, 255)
+DEFAULT_GEMS = 15
+DEFAULT_ROCKS = 20
+SCORE = 200
 
 
 def main():
@@ -31,13 +36,13 @@ def main():
 
     # create the banner
     banner = Actor()
-    banner.set_text("The Score")
+    banner.set_text(f"Score: {SCORE}")
     banner.set_font_size(FONT_SIZE)
     banner.set_color(WHITE)
     banner.set_position(Point(CELL_SIZE, 0))
     cast.add_actor("banners", banner)
 
-    # creat a player
+    # create a player
     x = int(MAX_X/2)
     y = int(MAX_Y-1)
     position = Point(x, y)
@@ -47,6 +52,34 @@ def main():
     player.set_color(WHITE)
     player.set_position(position)
     cast.add_actor("player", player)
+
+    # create gems and rocks
+    for n in range(DEFAULT_GEMS):
+
+        x = random.randint(1, COLS - 1)
+        y = 0
+        position = Point(x, y)
+        position = position.scale(CELL_SIZE)
+
+        r = random.randint(0, 255)
+        g = random.randint(0, 255)
+        b = random.randint(0, 255)
+        color = Color(r, g, b)
+        
+        gem = Gems()
+        gem.set_text(banner.set_text())
+        gem.set_font_size(FONT_SIZE)
+        gem.set_color(color)
+        gem.set_position(position)
+        cast.add_actor("gem", gem)
+
+    for n in range(DEFAULT_ROCKS):
+        rock = Rocks()
+        rock.set_text(banner.set_text())
+        rock.set_font_size(FONT_SIZE)
+        rock.set_color(color)
+        rock.set_position(position)
+        cast.add_actor("rock", rock)
 
     # start the game
     keyboard_service = KeyboardService(CELL_SIZE)

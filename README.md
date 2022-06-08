@@ -27,6 +27,8 @@ greed-team-03   (project root folder)
   +-- game              (specific classes)
     +--actor.py
     +--cast.py
+    +--gems.py
+    +--rocks.py
     +--director.py
     +--keyboard_service.py
     +--video_service.py
