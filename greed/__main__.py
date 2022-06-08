@@ -26,7 +26,6 @@ CAPTION = "GREED"
 WHITE = Color(255, 255, 255)
 DEFAULT_GEMS = 15
 DEFAULT_ROCKS = 20
-SCORE = 200
 
 
 def main():
@@ -36,7 +35,7 @@ def main():
 
     # create the banner
     banner = Actor()
-    banner.set_text(f"Score: {SCORE}")
+    banner.set_text("")
     banner.set_font_size(FONT_SIZE)
     banner.set_color(WHITE)
     banner.set_position(Point(CELL_SIZE, 0))
@@ -44,20 +43,20 @@ def main():
 
     # create a player
     x = int(MAX_X/2)
-    y = int(MAX_Y-1)
+    y = int(MAX_Y - CELL_SIZE)
     position = Point(x, y)
     player = Actor() 
     player.set_text("#")
     player.set_font_size(FONT_SIZE) 
     player.set_color(WHITE)
     player.set_position(position)
-    cast.add_actor("player", player)
+    cast.add_actor("players", player)
 
     # create gems and rocks
-    for n in range(DEFAULT_GEMS):
+    for _ in range(DEFAULT_GEMS):
 
         x = random.randint(1, COLS - 1)
-        y = 0
+        y = random.randint(1, ROWS - 1)
         position = Point(x, y)
         position = position.scale(CELL_SIZE)
 
@@ -67,19 +66,26 @@ def main():
         color = Color(r, g, b)
         
         gem = Gems()
-        gem.set_text(banner.set_text("text"))
+        gem.set_text("*")
         gem.set_font_size(FONT_SIZE)
         gem.set_color(color)
         gem.set_position(position)
-        cast.add_actor("gem", gem)
+        gem.set_score(5)
+        cast.add_actor("gems", gem)
 
-    for n in range(DEFAULT_ROCKS):
+    for _ in range(DEFAULT_ROCKS):
+        x = random.randint(1, COLS - 1)
+        y = random.randint(1, ROWS - 1)
+        position = Point(x, y)
+        position = position.scale(CELL_SIZE)
+
         rock = Rocks()
-        rock.set_text(banner.set_text("text"))
+        rock.set_text("O")
         rock.set_font_size(FONT_SIZE)
         rock.set_color(color)
         rock.set_position(position)
-        cast.add_actor("rock", rock)
+        rock.set_score(5)
+        cast.add_actor("rocks", rock)
 
     # start the game
     keyboard_service = KeyboardService(CELL_SIZE)

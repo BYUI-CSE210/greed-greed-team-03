@@ -59,6 +59,23 @@ class Point:
         """
         return self._y
 
+    def set_y(self, value):
+        """Sets value of y based on argument
+        
+        
+        Args:
+            value(int): Value to be set to"""
+        self._y = value
+
+    def set_x(self, value):
+        """Sets value of x
+        
+        Args:
+            value(int): Value to be set to
+        """
+        
+        self._x = value
+
     def scale(self, factor):
         """
         Scales the point by the provided factor.
@@ -70,3 +87,4 @@ class Point:
             Point: A new Point that is scaled.
         """
         return Point(self._x * factor, self._y * factor)
+        

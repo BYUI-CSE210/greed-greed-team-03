@@ -5,7 +5,7 @@ class Rocks(Actor):
 
     def __init__(self):
         super().__init__()
-        self._score = -5
+        self._score = 0
 
     def get_score(self):
         """Gets the rock score.
