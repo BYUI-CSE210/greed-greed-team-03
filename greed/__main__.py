@@ -67,7 +67,7 @@ def main():
         color = Color(r, g, b)
         
         gem = Gems()
-        gem.set_text(banner.set_text())
+        gem.set_text(banner.set_text("text"))
         gem.set_font_size(FONT_SIZE)
         gem.set_color(color)
         gem.set_position(position)
@@ -75,7 +75,7 @@ def main():
 
     for n in range(DEFAULT_ROCKS):
         rock = Rocks()
-        rock.set_text(banner.set_text())
+        rock.set_text(banner.set_text("text"))
         rock.set_font_size(FONT_SIZE)
         rock.set_color(color)
         rock.set_position(position)
