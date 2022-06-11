@@ -3,8 +3,8 @@
     Rules listed and your program meets all of the Requirements found on 
     https://byui-cse.github.io/cse210-course-competency/inheritance/materials/greed-specification.html
 """
-import time
 import random
+from game.shared.point import Point
 
 class Director:
     """A person who directs the game. 
@@ -38,37 +38,11 @@ class Director:
         """
         self._video_service.open_window()
         while self._video_service.is_window_open():
-            self._drop_objects(cast)
             self._get_inputs(cast)
             self._do_updates(cast)
             self._do_outputs(cast)
         self._video_service.close_window()
 
-    def _drop_objects(self, cast):
-        """Displays Falling Rocks and Gems.
-
-        Args:
-            cast (Cast): The cast of actors.
-        """
-        rocks = cast.get_actors("rocks")
-        gems = cast.get_actors("gems")
-        
-        for rock in rocks:
-            rock_y = rock.get_position().get_y()
-            time.sleep(0.002)
-            rock.get_position().set_y(rock_y + 5)
-            if rock_y >= 595:
-                rock.get_position().set_y(0)
-                rock.get_position().set_x(random.randrange(15, 885, 15))
-        
-
-        for gem in gems:
-            gem_y = gem.get_position().get_y()
-            time.sleep(0.002)
-            gem.get_position().set_y(gem_y + 5)
-            if gem_y >= 595:
-                gem.get_position().set_y(0)
-                gem.get_position().set_x(random.randrange(15, 885, 15))
         
 
         
@@ -98,15 +72,33 @@ class Director:
         max_y = self._video_service.get_height()
         player.move_next(max_x, max_y)
 
+
+
+        for gem in gems:
+            gem.set_velocity(Point(0,5))
+            gem.move_next(max_x, max_y)
+            if gem.get_position().get_y() >= 595:
+                gem.get_position().set_y(0)
+                gem.get_position().set_x(random.randrange(15, 885, 15))
+        for rock in rocks:
+            rock.set_velocity(Point(0,5))
+            rock.move_next(max_x, max_y)
+            
+            if rock.get_position().get_y() >= 595:
+                rock.get_position().set_y(0)
+                rock.get_position().set_x(random.randrange(15, 885, 15))  
+          
       
         # Position Validation
         for gem in gems:
             if gem.get_position().equals(player.get_position()):
                 self._score += 5
+                gem.set_text("")
                 score.set_text(f"Score: {self._score}")
         for rock in rocks:    
             if rock.get_position().equals(player.get_position()):
                 self._score -= 5
+                rock.set_text("")
                 score.set_text(f"Score: {self._score}")
         
 

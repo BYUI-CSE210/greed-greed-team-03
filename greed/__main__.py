@@ -3,8 +3,8 @@ import random
 
 from game.casting.actor import Actor
 from game.casting.cast import Cast
-from game.casting.gems import Gems
-from game.casting.rocks import Rocks
+from game.casting.objects import Object
+
 
 from game.directing.director import Director
 
@@ -65,7 +65,7 @@ def main():
         b = random.randint(0, 255)
         color = Color(r, g, b)
         
-        gem = Gems()
+        gem = Object()
         gem.set_text("*")
         gem.set_font_size(FONT_SIZE)
         gem.set_color(color)
@@ -74,12 +74,13 @@ def main():
         cast.add_actor("gems", gem)
 
     for _ in range(DEFAULT_ROCKS):
+        color = Color(255, 0, 0)
         x = random.randint(1, COLS - 1)
         y = random.randint(1, ROWS - 1)
         position = Point(x, y)
         position = position.scale(CELL_SIZE)
 
-        rock = Rocks()
+        rock = Object()
         rock.set_text("O")
         rock.set_font_size(FONT_SIZE)
         rock.set_color(color)

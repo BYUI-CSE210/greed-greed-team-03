@@ -1,14 +1,17 @@
 from game.casting.actor import Actor
 
-class Rocks(Actor):
-    """Falling Object that increase points by -5 when in contact with player"""
+class Object(Actor):
+    """Falling Object that increases or decreases when in contact with player
+        Attributes:
+        _score(int): How much to increase/decrease by when in contact with player.
+        """
 
     def __init__(self):
         super().__init__()
         self._score = 0
 
     def get_score(self):
-        """Gets the rock score.
+        """Gets the gem score
         
         Returns:
             int: the score.
