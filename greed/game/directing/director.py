@@ -80,13 +80,15 @@ class Director:
             if gem.get_position().get_y() >= 595:
                 gem.get_position().set_y(0)
                 gem.get_position().set_x(random.randrange(15, 885, 15))
+                gem.set_text("*")
         for rock in rocks:
             rock.set_velocity(Point(0,5))
             rock.move_next(max_x, max_y)
             
             if rock.get_position().get_y() >= 595:
                 rock.get_position().set_y(0)
-                rock.get_position().set_x(random.randrange(15, 885, 15))  
+                rock.get_position().set_x(random.randrange(15, 885, 15))
+                rock.set_text("O")  
           
       
         # Position Validation
